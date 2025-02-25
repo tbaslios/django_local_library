@@ -15,9 +15,7 @@ def index(request):
 
     # The 'all()' is implied by default.
     def index(request):
-    # …
-
-    num_authors = Author.objects.count()  # The 'all()' is implied by default.
+        num_authors = Author.objects.count()  # The 'all()' is implied by default.
 
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
