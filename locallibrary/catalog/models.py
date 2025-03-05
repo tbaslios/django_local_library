@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+from datetime import date
+
 
 # Create your models here.
 from django.urls import (
@@ -108,6 +111,8 @@ import uuid  # Required for unique book instances
 
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+    borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+
 
     id = models.UUIDField(
         primary_key=True,
@@ -135,10 +140,17 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ["due_back"]
+        permissions = (("can_mark_returned", "Set book as returned"),)
 
     def __str__(self):
         """String for representing the Model object."""
         return f"{self.id} ({self.book.title})"
+    
+    @property
+    def is_overdue(self):
+        """Determines if the book is overdue based on due date and current date."""
+        return bool(self.due_back and date.today() > self.due_back)
+
 
 
 class Author(models.Model):
