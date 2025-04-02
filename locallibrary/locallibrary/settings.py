@@ -1,8 +1,15 @@
 from pathlib import Path
 import os
 import sys
-from django.core.management.utils import get_random_secret_key
 import dj_database_url
+from django.core.management.utils import get_random_secret_key
+import environ
+
+# Set up base directory and environment
+BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+env.read_env(str(BASE_DIR / ".env"))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
