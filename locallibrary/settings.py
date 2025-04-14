@@ -114,4 +114,6 @@ REST_FRAMEWORK = {
     ),
 }
 
+print("DEBUG:", DEBUG)
+print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
