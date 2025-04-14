@@ -114,6 +114,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-print("DEBUG:", DEBUG)
+print("RAW ALLOWED_HOSTS ENV:", os.getenv("ALLOWED_HOSTS"))
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
